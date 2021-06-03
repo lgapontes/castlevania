@@ -1,0 +1,238 @@
+* {
+  padding: 2px;
+}
+html {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  background-image: url('../img/background.jpg');
+}
+body {
+  margin: 0;
+  border: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+header {
+  width: 400px;
+  box-sizing: border-box;
+
+  display: block;
+  margin: 10px auto 0 auto;
+}
+header img {
+  max-width: 300px;
+  display: block;
+  margin: 0 auto 6px auto;
+}
+main {
+  width: 400px;
+  border: 0;
+  padding: 0;
+
+  display: block;
+  margin: 0 auto 10px auto;
+}
+main::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+main > div.lista {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+main > div.lista::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+main form {
+  width: 400px;
+  border: 1px solid #222;
+  background-image: linear-gradient(to bottom, #212121,  #313131);
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 4px;
+  color: #fff;
+  margin-top: 10px;
+  display: block;
+}
+
+main form::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+main div.arma {
+  width: 400px;
+  border: 1px solid #222;
+  background-image: linear-gradient(to bottom, #424242,  #525252);
+  border-radius: 3px;
+  box-sizing: border-box;
+  padding: 4px;
+  color: #fff;
+  margin-top: 10px;
+
+  display: block;
+  float: left;
+}
+
+main div.arma::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+main div.arma > div.background-imagem {
+  width: 105px;
+  height: 105px;
+  float: left;
+  display: block;
+  background-image: url('../img/bloco_v1.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+main div.arma > div.background-imagem > span.img {
+  display: inline-block;
+  height: 80px;
+  width: 80px;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin-top: 10px;
+  margin-left: 10px;
+  display: block;
+}
+
+main div.arma > div.texto {
+  float: left;
+  display: block;
+  max-width: 270px;
+}
+main div.arma > div.texto > span {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+main div.arma > div.texto > span.valor {
+  color: #85857d;
+  font-size: 1em;
+}
+main div.arma > div.texto > span.nome {
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #babab2;
+  display: block;
+}
+main div.arma > div.texto > span.atributo {
+  font-size: 1em;
+  font-weight: bold;
+  color: #babab2;
+}
+main div.arma > div.texto > span.notas {
+  font-size: 1em;
+  margin-left: 10px;
+  display: block;
+  color: #85857d;
+}
+
+main h1 {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #babab2;
+  display: block;
+  margin: 5px 0 0 0;
+  background-image: url('../img/box.png');
+  background-repeat: no-repeat;
+  background-size: 200px;
+  background-position: center 0;
+  text-align: center;
+  height: 40px;
+  line-height: 35px;
+  margin-top: 30px;
+}
+
+main h1.maior {
+  background-image: url('../img/box2.png');
+  background-size: 360px;
+}
+
+main form > h2 {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #babab2;
+  display: block;
+  margin: 0;
+  text-align: center;
+  line-height: 25px;
+}
+
+main form > hr {
+  padding: 0;
+  border: 0;
+  border-top: 1px solid #babab2;
+  margin: 5px;
+}
+
+main form > div {
+  padding: 0;
+  border: 0;
+  margin: 5px;
+}
+
+main form > div > span {
+  font-weight: bold;
+}
+
+main form > div > input[type=number] {
+  width: 40px;
+}
+
+main form > button[type=submit] {
+  display: block;
+  float: right;
+  margin-right: 5px;
+}
+
+main form > button[type=submit]::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+main form > button[type=submit] > span {
+  margin: 0 5px 0 5px;
+  line-height: 20px;
+  padding: 0;
+  border: 0;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-shadow: 1px;
+  display: block;
+  float: right;
+}
+
+main form > button[type=submit] > img {
+  height: 20px;
+  margin: 0 0 0 5px;
+  padding: 0;
+  border: 0;
+  display: block;
+  float: left;
+}

@@ -1,0 +1,888 @@
+const RENDER_ARMA = 'arma';
+const RENDER_ESCUDO = 'escudo';
+const RENDER_ARMADURA = 'armadura';
+const RENDER_RELIQUIA = 'reliquia';
+const RENDER_POCAO = 'pocao';
+
+/*
+  adaga_41.png
+  arco_v32.png
+  cajado_34.png
+  chicote_26.png
+  espada_49.png
+
+  escudo_30.png
+  pocao_23.png
+  reliquia_40.png
+  robe_20.png
+  armadura_31.png
+*/
+
+let NOMES_ADAGAS = [
+  'Dagger',
+  'Knife',
+  'Poniard',
+  'Bodkin'
+];
+
+let NOMES_CAJADOS = [
+  'Staff',
+  'Rod'
+];
+
+let NOMES_ARCOS = [
+  'Bow',
+  'Longbow',
+  'Shortbow'
+];
+
+let NOMES_CHICOTES = [
+  'Whip',
+  'Lash',
+  'Scourge'
+];
+
+let NOMES_ESPADAS = [
+  'Sword',
+  'Blade',
+  'Broadsword',
+  'Saber',
+  'Longsword',
+  'Shortsword'
+];
+
+let NOMES_ARMADURAS = [
+  'Corset',
+  'Loriga',
+  'Brigandina',
+  'Brunea',
+  'Gibbon',
+  'Chainmail',
+  'Armor',
+  'Fullplate'
+];
+
+let MALDICOES_POCOES = [
+  'Recebe 1 de dano em Potência',
+  'Recebe 1 de dano em Intelecto',
+  'Recebe 1 de dano em Velocidade',
+  'Recebe 2 de dano em Potência',
+  'Recebe 2 de dano em Intelecto',
+  'Recebe 2 de dano em Velocidade',
+  'Recebe 3 de dano em Potência',
+  'Recebe 3 de dano em Intelecto',
+  'Recebe 3 de dano em Velocidade',
+  'Recebe 1/3 do nível do item de dano em Potência',
+  'Recebe 1/3 do nível do item de dano em Intelecto',
+  'Recebe 1/3 do nível do item de dano em Velocidade',
+  'Recebe 1/2 do nível do item de dano em Potência',
+  'Recebe 1/2 do nível do item de dano em Intelecto',
+  'Recebe 1/2 do nível do item de dano em Velocidade',
+  'Recebe o nível do item de dano em Potência',
+  'Recebe o nível do item de dano em Intelecto',
+  'Recebe o nível do item de dano em Velocidade',
+  'Por uma hora, as rolagens de Iniciativa têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Furtividade têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Escalada têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Salto têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Lockpicking têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Sentir Elementos Mágicos (ou similar) têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Sentir o Sobrenatural (ou similar) têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Equilibrar-se têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Rastrear têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Enganar têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Percepção têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de História têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Salto têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Identificação têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Potência têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Velocidade têm dificuldade aumentada em um passo',
+  'Por uma hora, as rolagens de Intelecto têm dificuldade aumentada em um passo',
+  'Por uma hora, anula qualquer aura ou iluminação criada por arma, escudo, armadura ou relíquia'
+];
+
+let DETALHES_POCOES = [
+  // LEVEL 1
+  [
+    'Recupera 1 ponto de Potência',
+    'Recupera 1 ponto de Velocidade',
+    'Recupera 1 ponto de Intelecto',
+    'Recupera 2 pontos de Potência',
+    'Recupera 2 pontos de Velocidade',
+    'Recupera 2 pontos de Intelecto',
+    'Recupera 3 pontos de Potência',
+    'Recupera 3 pontos de Velocidade',
+    'Recupera 3 pontos de Intelecto',
+    'Recupera 1/3 do nível do item de pontos de Potência',
+    'Recupera 1/3 do nível do item de pontos de Velocidade',
+    'Recupera 1/3 do nível do item de pontos de Intelecto',
+    'Por uma hora, as rolagens de Iniciativa são facilitadas em um passo',
+    'Por uma hora, as rolagens de Furtividade são facilitadas em um passo',
+    'Por uma hora, as rolagens de Escalada são facilitadas em um passo',
+    'Por uma hora, as rolagens de Salto são facilitadas em um passo',
+    'Por uma hora, as rolagens de Lockpicking são facilitadas em um passo',
+    'Se arremessada, afasta zumbis para uma distância curta',
+    'Se arremessada, afasta fantasmas para uma distância curta',
+    'Se arremessada, afasta bestas para uma distância curta',
+    'Se arremessada, afasta múmias para uma distância curta',
+    'Se arremessada, afasta esqueletos para uma distância curta',
+    'Se arremessada, provoca 1d6 de dano contra zumbis',
+    'Se arremessada, provoca 1d6 de dano contra fantasmas',
+    'Se arremessada, provoca 1d6 de dano contra bestas',
+    'Se arremessada, provoca 1d6 de dano contra múmias',
+    'Se arremessada, provoca 1d6 de dano contra esqueletos',
+    'Se arremessada, provoca 1d4 de dano contra vampiros',
+    'Por uma hora, aumenta a limunosidade por 10 metros',
+    'Caso a rolagem de recuperação de 1 Ação tiver sido utilizada, pode recuperá-la',
+    'Caso a rolagem de recuperação de 10 Minutos tiver sido utilizada, pode recuperá-la',
+    'Se misturada com outra poção, pode remover a maldição (teste de Alquimia de nível 4)',
+    'Se misturada com outra poção, pode remover a maldição (teste de Alquimia de nível 5)',
+    'Se misturada com outra poção, pode remover a maldição (teste de Alquimia de nível 3)',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +1 de dano de fogo por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +1 de dano de gelo por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +1 de dano de veneno por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +1 de dano de ácido por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +1 de dano de necrótico por 1 hora'
+  ],
+  // LEVEL 2
+  [
+    'Recupera 4 pontos de Potência',
+    'Recupera 4 pontos de Velocidade',
+    'Recupera 4 pontos de Intelecto',
+    'Recupera 1/2 do nível do item de pontos de Potência',
+    'Recupera 1/2 do nível do item de pontos de Velocidade',
+    'Recupera 1/2 do nível do item de pontos de Intelecto',
+    'Se misturada com outra poção, pode remover a maldição (teste de Alquimia de nível 2)',
+    'Se misturada com outra poção, pode remover a maldição (teste de Alquimia de nível 3)',
+    'Por uma hora, as rolagens de Sentir Elementos Mágicos (ou similar) são facilitadas em um passo',
+    'Por uma hora, as rolagens de Sentir o Sobrenatural (ou similar) são facilitadas em um passo',
+    'Por uma hora, as rolagens de Equilibrar-se são facilitadas em um passo',
+    'Por uma hora, as rolagens de Rastrear são facilitadas em um passo',
+    'Por uma hora, as rolagens de Enganar são facilitadas em um passo',
+    'Por uma hora, as rolagens de Percepção são facilitadas em um passo',
+    'Por uma hora, as rolagens de História são facilitadas em um passo',
+    'Por uma hora, as rolagens de Salto são facilitadas em um passo',
+    'Por uma hora, as rolagens de Identificação são facilitadas em um passo',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +2 de dano de fogo por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +2 de dano de gelo por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +2 de dano de veneno por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +2 de dano de ácido por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere +2 de dano de necrótico por 1 hora'
+  ],
+  // LEVEL 3
+  [
+    'Recupera 3 pontos de reserva (Potência, Velocidade ou Intelecto, a escolha do jogador)',
+    'Recupera 4 pontos de reserva (Potência, Velocidade ou Intelecto, a escolha do jogador)',
+    'Recupera 1d6 pontos de reserva (Potência, Velocidade ou Intelecto, a escolha do jogador)',
+    'Se misturada com outra poção, pode remover a maldição (teste de Alquimia de nível 1)',
+    'Por uma hora, as rolagens de Sentir Elementos Mágicos (ou similar) são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Sentir o Sobrenatural (ou similar) são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Equilibrar-se são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Rastrear são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Enganar são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Percepção são facilitadas em dois passos',
+    'Por uma hora, as rolagens de História são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Salto são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Identificação são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Salto são facilitadas em dois passos'
+  ],
+  // LEVEL 4
+  [
+    'Recupera o nível do item pontos de reserva (Potência, Velocidade ou Intelecto, a escolha do jogador)',
+    'Por uma hora, as rolagens de Iniciativa são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Furtividade são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Escalada são facilitadas em dois passos',
+    'Por uma hora, as rolagens de Lockpicking são facilitadas em dois passos',
+    'Se misturada com outra poção, pode remover a maldição (não exige teste de Alquimia)',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere 1/2 do nível do item de dano de fogo por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere 1/2 do nível do item de dano de gelo por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere 1/2 do nível do item de dano de veneno por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere 1/2 do nível do item de dano de ácido por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere 1/2 do nível do item de dano de necrótico por 1 hora'
+  ],
+  // LEVEL 5
+  [
+    'Se arremessada, afasta vampiros para uma distância curta',
+    'Se arremessada, provoca 1d10 de dano contra zumbis',
+    'Se arremessada, provoca 1d10 de dano contra fantasmas',
+    'Se arremessada, provoca 1d10 de dano contra bestas',
+    'Se arremessada, provoca 1d10 de dano contra múmias',
+    'Se arremessada, provoca 1d10 de dano contra esqueletos',
+    'Se arremessada, provoca 1d6 de dano contra vampiros',
+    'Recupera 2x o nível do item pontos de reserva (Potência, Velocidade ou Intelecto, a escolha do jogador)',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere o nível do item de dano contra zumbis por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere o nível do item de dano contra fantasmas por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere o nível do item de dano contra bestas por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere o nível do item de dano contra múmias por 1 hora',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere o nível do item de dano contra esqueletos por 1 hora'
+  ],
+  // LEVEL 6
+  [
+    'Se arremessada, provoca o nível do item de dano contra zumbis',
+    'Se arremessada, provoca o nível do item de dano contra fantasmas',
+    'Se arremessada, provoca o nível do item de dano contra bestas',
+    'Se arremessada, provoca o nível do item de dano contra múmias',
+    'Se arremessada, provoca o nível do item de dano contra esqueletos',
+    'Se arremessada, provoca 1/2 nível do item de dano contra vampiros',
+    'Se banhar uma arma de ataque corpo-a-corpo ou os projéteis de uma arma à distância, confere o nível do item de dano contra vampiros por 1 hora',
+    'Recupera 3x o nível do item pontos de reserva (Potência, Velocidade ou Intelecto, a escolha do jogador)',
+  ]
+];
+
+let DETALHES_RELIQUIAS = [
+  // LEVEL 1
+  [
+    'Durante a noite, provê +1 na reserva de Potência',
+    'Durante o dia, provê +1 na reserva de Potência',
+    'Durante a noite, provê +1 na reserva de Velocidade',
+    'Durante o dia, provê +1 na reserva de Velocidade',
+    'Durante a noite, provê +1 na reserva de Intelecto',
+    'Durante o dia, provê +1 na reserva de Intelecto',
+    'Cria uma aura (nível da relíquia em metros) que tem 50% de afastar zumbis',
+    'Cria uma aura (nível da relíquia em metros) que tem 50% de afastar fantasmas',
+    'Cria uma aura (nível da relíquia em metros) que tem 50% de afastar bestas',
+    'Cria uma aura (nível da relíquia em metros) que tem 50% de afastar múmias',
+    'Cria uma aura (nível da relíquia em metros) que tem 50% de afastar esqueletos',
+    'Cria uma cópia fantasmagórico que pode ficar a até 15 metros, com duração em horas igual ao nível da relíquia',
+    'Transforma sua pele em pedra reduzindo 1 ponto de dano, mas aumenta a dificuldade de Iniciativa em 1 passo',
+    'Proporciona redução em 1 passo em testes de furtividade',
+    'Proporciona redução em 1 passo em testes de escalada',
+    'Proporciona redução em 1 passo em testes de investigação',
+    'Uma vez por dia permite realizar uma rolagem de recuperação como uma ação',
+    'Reduz a dificuldade em 1 passo nos testes de adestrar animais',
+    'Reduz a dificuldade em 1 passo nos testes de saltar',
+    'Reduz a dificuldade em 1 passo nos testes de percepção',
+    'Reduz a dificuldade em 1 passo nos testes de rastreio',
+    'Provê +1 na reserva de Potência, e reduz 1 ponto na reserva de Velocidade',
+    'Provê +1 na reserva de Potência, e reduz 1 ponto na reserva de Inteligência',
+    'Provê +1 na reserva de Velocidade, e reduz 1 ponto na reserva de Potência',
+    'Provê +1 na reserva de Velocidade, e reduz 1 ponto na reserva de Inteligência',
+    'Provê +1 na reserva de Inteligência, e reduz 1 ponto na reserva de Potência',
+    'Provê +1 na reserva de Inteligência, e reduz 1 ponto na reserva de Velocidade'
+  ],
+  // LEVEL 2
+  [
+    'Uma vez por dia pode utilizar 1 esforço a mais que o permitido por seu grau, consumindo os pontos de atributos normalmente',
+    'Proporciona treinamento em detectar objetos mágicos (se já for treinado, torna-se especializado)',
+    'Proporciona treinamento em encontrar armadilhas (se já for treinado, torna-se especializado)',
+    'Proporciona treinamento em desarmar armadilhas (se já for treinado, torna-se especializado)',
+    'Proporciona treinamento em enganar (se já for treinado, torna-se especializado)',
+    'Proporciona treinamento em furtar (se já for treinado, torna-se especializado)',
+    'Proporciona treinamento em intimidação (se já for treinado, torna-se especializado)',
+    'Provê +1 na reserva de Potência',
+    'Provê +1 na reserva de Potência',
+    'Provê +1 na reserva de Velocidade',
+    'Provê +1 na reserva de Velocidade',
+    'Provê +1 na reserva de Intelecto',
+    'Durante o dia, provê +1 na reserva de Intelecto',
+    'Cria uma aura (nível da relíquia em metros) que tem 75% de afastar zumbis',
+    'Cria uma aura (nível da relíquia em metros) que tem 75% de afastar fantasmas',
+    'Cria uma aura (nível da relíquia em metros) que tem 75% de afastar bestas',
+    'Cria uma aura (nível da relíquia em metros) que tem 75% de afastar múmias',
+    'Cria uma aura (nível da relíquia em metros) que tem 75% de afastar esqueletos'
+  ],
+  // LEVEL 3
+  [
+    'Aumenta a margem de Potência em 1 ponto, e reduz 3 pontos da reserva de Velocidade',
+    'Aumenta a margem de Potência em 1 ponto, e reduz 3 pontos da reserva de Intelecto',
+    'Aumenta a margem de Velocidade em 1 ponto, e reduz 3 pontos da reserva de Potência',
+    'Aumenta a margem de Velocidade em 1 ponto, e reduz 3 pontos da reserva de Intelecto',
+    'Aumenta a margem de Intelecto em 1 ponto, e reduz 3 pontos da reserva de Velocidade',
+    'Aumenta a margem de Intelecto em 1 ponto, e reduz 3 pontos da reserva de Intelecto',
+    'Provê +2 na reserva de Potência',
+    'Provê +2 na reserva de Potência',
+    'Provê +2 na reserva de Velocidade',
+    'Provê +2 na reserva de Velocidade',
+    'Provê +2 na reserva de Intelecto',
+    'Cria uma aura (nível da relíquia em metros) que afasta zumbis',
+    'Cria uma aura (nível da relíquia em metros) que afasta fantasmas',
+    'Cria uma aura (nível da relíquia em metros) que afasta bestas',
+    'Cria uma aura (nível da relíquia em metros) que afasta múmias',
+    'Cria uma aura (nível da relíquia em metros) que afasta esqueletos'
+  ],
+  // LEVEL 4
+  [
+    'Aumenta a margem de Potência em 1 ponto, e reduz 2 pontos da reserva de Velocidade',
+    'Aumenta a margem de Potência em 1 ponto, e reduz 2 pontos da reserva de Intelecto',
+    'Aumenta a margem de Velocidade em 1 ponto, e reduz 2 pontos da reserva de Potência',
+    'Aumenta a margem de Velocidade em 1 ponto, e reduz 2 pontos da reserva de Intelecto',
+    'Aumenta a margem de Intelecto em 1 ponto, e reduz 2 pontos da reserva de Velocidade',
+    'Aumenta a margem de Intelecto em 1 ponto, e reduz 2 pontos da reserva de Intelecto',
+    'Provê +3 na reserva de Potência',
+    'Provê +3 na reserva de Potência',
+    'Provê +3 na reserva de Velocidade',
+    'Provê +3 na reserva de Velocidade',
+    'Provê +3 na reserva de Intelecto',
+    'Cria uma aura (nível da relíquia em metros) que fere zumbis com 1 ponto de dano por rodada',
+    'Cria uma aura (nível da relíquia em metros) que fere fantasmas com 1 ponto de dano por rodada',
+    'Cria uma aura (nível da relíquia em metros) que fere bestas com 1 ponto de dano por rodada',
+    'Cria uma aura (nível da relíquia em metros) que fere múmias com 1 ponto de dano por rodada',
+    'Cria uma aura (nível da relíquia em metros) que fere esqueletos com 1 ponto de dano por rodada'
+  ],
+  // LEVEL 5
+  [
+    'Aumenta a margem de Potência em 1 ponto, e reduz 1 ponto da reserva de Velocidade',
+    'Aumenta a margem de Potência em 1 ponto, e reduz 1 ponto da reserva de Intelecto',
+    'Aumenta a margem de Velocidade em 1 ponto, e reduz 1 ponto da reserva de Potência',
+    'Aumenta a margem de Velocidade em 1 ponto, e reduz 1 ponto da reserva de Intelecto',
+    'Aumenta a margem de Intelecto em 1 ponto, e reduz 1 ponto da reserva de Velocidade',
+    'Aumenta a margem de Intelecto em 1 ponto, e reduz 1 ponto da reserva de Intelecto',
+    'Cria uma aura (nível da relíquia em metros) que paraliza zumbis por 1 rodada',
+    'Cria uma aura (nível da relíquia em metros) que paraliza fantasmas por 1 rodada',
+    'Cria uma aura (nível da relíquia em metros) que paraliza bestas por 1 rodada',
+    'Cria uma aura (nível da relíquia em metros) que paraliza múmias por 1 rodada',
+    'Cria uma aura (nível da relíquia em metros) que paraliza esqueletos por 1 rodada'
+  ],
+  // LEVEL 6
+  [
+    'Aumenta a margem de Potência em 1 ponto',
+    'Aumenta a margem de Potência em 1 ponto',
+    'Aumenta a margem de Velocidade em 1 ponto',
+    'Aumenta a margem de Velocidade em 1 ponto',
+    'Aumenta a margem de Intelecto em 1 ponto',
+    'Aumenta a margem de Intelecto em 1 ponto',
+    'Cria uma aura (nível da relíquia em metros) que paraliza vampiros por 1 rodada',
+    'Cria uma aura (nível da relíquia em metros) que fere vampiros com 1 ponto de dano por rodada',
+    'Provê +2 na reserva de Potência e +2 na reserva de Velocidade',
+    'Provê +2 na reserva de Potência e +2 na reserva de Intelecto',
+    'Provê +2 na reserva de Intelecto e +2 na reserva de Velocidade'
+  ]
+]
+
+let NOTAS_ARMADURAS = [
+  // LEVEL 1
+  [
+    'Curtida em couro sagrado',
+    'Metal prateado reforçado',
+    'Curtida em peles rústicas',
+    'Forjada de metal negro',
+    'Forja reforçada de aço',
+    'Forjada em ferro malígno',
+    'Forjada em prata',
+    'Forjada em bronze',
+    'Forjada com placas de mithril',
+    'Aumenta 1 passo de dificuldade em Iniciativa'
+  ],
+  // LEVEL 2
+  [
+    'Reduz 1 ponto de dano de zumbis',
+    'Reduz 1 ponto de dano de fantasmas',
+    'Reduz 1 ponto de dano de bestas',
+    'Reduz 1 ponto de dano de vampiros',
+    'Reduz 1 ponto de dano de múmias',
+    'Reduz 1 ponto de dano de esqueletos'
+  ],
+  // LEVEL 3
+  [
+    'Reduz 1 ponto de dano cortante',
+    'Reduz 1 ponto de dano perfurante',
+    'Reduz 1 ponto de dano venenoso',
+    'Reduz 1 ponto de dano necrótico',
+    'Reduz 1 ponto de dano de vampiros'
+  ],
+  // LEVEL 4
+  [
+    'Reduz 1 ponto de dano',
+    'Reduz 1 ponto de custo por nível de esforço em Velocidade'
+  ],
+  // LEVEL 5
+  [
+    'Reduz 2 pontos de dano'
+  ],
+  // LEVEL 6
+  [
+    'Reduz 3 pontos de dano'
+  ]
+];
+
+let NOTAS_ESCUDOS = [
+  // LEVEL 1
+  [
+    'Forjado com madeira maligna',
+    'Forjado com aço maligno',
+    'Forjado com ferro maligno',
+    'Forjado com bronze maligno',
+    'Forjado com madeira sagrada',
+    'Forjado com aço sagrado',
+    'Forjado com ferro sagrado',
+    'Forjado com bronze sagrado',
+    'Forjado com madeira da floresta sombria',
+    'Forjado com aço de espadas perdidas',
+    'Forjado com ferro banhado a sangue',
+    'Forjado com bronze dos pilares dourados',
+    'Forjado com mithril',
+    'Forjado com prata'
+  ],
+  // LEVEL 2
+  [
+    'Emite brilho esverdeado se zumbis estiverem próximos',
+    'Emite brilho prateado se fantasmas estiverem próximos',
+    'Emite brilho azulado se bestas estiverem próximas',
+    'Emite brilho alaranjado se múmias estiverem próximas',
+    'Emite brilho amarelado se esqueletos estiverem próximos',
+    'Emite brilho avermelhado se vampiros estiverem próximos',
+    'Forjado com ossos de lobisomem (vibra se existir vampiros próximos)'
+  ],
+  // LEVEL 3
+  [
+    'Reduz 1 ponto de dano de zumbis',
+    'Reduz 1 ponto de dano de fantasmas',
+    'Reduz 1 ponto de dano de bestas',
+    'Reduz 1 ponto de dano de vampiros',
+    'Reduz 1 ponto de dano de múmias',
+    'Reduz 1 ponto de dano de esqueletos'
+  ],
+  // LEVEL 4
+  [
+    'Reduz 1 ponto de dano'
+  ],
+  // LEVEL 5
+  [
+    'Reduz 2 pontos de dano'
+  ],
+  // LEVEL 6
+  [
+    'Reduz 3 pontos de dano'
+  ]
+];
+
+let NOTAS_ARMAS = [
+  // LEVEL 1
+  [
+    '+1 de dano contra zumbis',
+    '+1 de dano contra fantasmas',
+    '+1 de dano contra bestas',
+    '+1 de dano contra vampiros',
+    '+1 de dano contra múmias',
+    '+1 de dano contra esqueletos',
+    '+1 de dano de fogo',
+    '+1 de dano de gelo',
+    '+1 de dano de veneno',
+    '+1 de dano de ácido',
+    '+1 de dano necrótico',
+    '+1 de dano',
+    '-1 de dano',
+    'Reduz a dificuldade em 1 passo contra zumbis',
+    'Reduz a dificuldade em 1 passo contra fantasmas',
+    'Reduz a dificuldade em 1 passo contra bestas',
+    'Reduz a dificuldade em 1 passo contra vampiros',
+    'Reduz a dificuldade em 1 passo contra múmias',
+    'Reduz a dificuldade em 1 passo contra esqueletos',
+    'Provoca um estrondo de trovão ao acertar',
+    'Não provoca nenhum ruído ao acertar',
+    'Aumenta a dificuldade em 1 passo em Iniciativa',
+    'Com 1 esforço de Potência, provoca +1d4 de dano',
+    'Com 1 esforço de Potência, provoca 2 de dano',
+    'Com 1 esforço de Velocidade, provoca +1d4 de dano',
+    'Com 1 esforço de Velocidade, provoca 2 de dano',
+    'Com 1 esforço de Intelecto, provoca +1d4 de dano',
+    'Com 1 esforço de Intelecto, provoca 2 de dano',
+    'Permite rerolar o teste de ataque em caso de falha crítica',
+    'Efeito Menor: derruba o inimigo',
+    'Efeito Menor: deixa o inimigo atordoado por 1 turno',
+    'Efeito Menor: cega o inimigo por 1 turno',
+    'Efeito Menor: apavora o inimigo por 1 turno',
+    'Efeito Maior: derruba o inimigo',
+    'Efeito Maior: deixa o inimigo atordoado por 1 turno',
+    'Efeito Maior: cega o inimigo por 1 turno',
+    'Efeito Maior: apavora o inimigo por 1 turno'
+  ],
+  // LEVEL 2
+  [
+    '+2 de dano contra zumbis',
+    '+2 de dano contra zumbis',
+    '+2 de dano contra fantasmas',
+    '+2 de dano contra bestas',
+    '+2 de dano contra vampiros',
+    '+2 de dano contra múmias',
+    '+2 de dano contra esqueletos',
+    '+2 de dano de fogo',
+    '+2 de dano de gelo',
+    '+2 de dano de veneno',
+    '+2 de dano de ácido',
+    '+2 de dano necrótico',
+    '+2 de dano',
+    '-2 de dano',
+    'Com 2 esforços de Potência, provoca +1d6 de dano',
+    'Com 2 esforços de Potência, provoca 4 de dano',
+    'Com 2 esforços de Velocidade, provoca +1d6 de dano',
+    'Com 2 esforços de Velocidade, provoca 4 de dano',
+    'Com 2 esforços de Intelecto, provoca +1d6 de dano',
+    'Com 2 esforços de Intelecto, provoca 4 de dano',
+    'Reduz a dificuldade em 1 passo',
+    'Aumenta a dificuldade em 2 passos em Iniciativa',
+    'Efeito Menor: deixa o inimigo atordoado por 2 turnos',
+    'Efeito Menor: cega o inimigo por 2 turnos',
+    'Efeito Menor: apavora o inimigo por 2 turnos',
+    'Efeito Menor: permite realizar outro ataque',
+    'Efeito Menor: recupera 1 ponto de Potência',
+    'Efeito Menor: recupera 1 ponto de Velocidade',
+    'Efeito Menor: recupera 1 ponto de Intelecto',
+    'Efeito Menor: recupera 1 ponto de atributo',
+    'Efeito Maior: deixa o inimigo atordoado por 2 turnos',
+    'Efeito Maior: cega o inimigo por 2 turnos',
+    'Efeito Maior: apavora o inimigo por 2 turnos',
+    'Efeito Maior: permite realizar outro ataque',
+    'Efeito Maior: recupera 1 ponto de Potência',
+    'Efeito Maior: recupera 1 ponto de Velocidade',
+    'Efeito Maior: recupera 1 ponto de Intelecto',
+    'Efeito Maior: recupera 1 ponto de atributo'
+  ],
+  // LEVEL 3
+  [
+    '+3 de dano contra zumbis',
+    '+3 de dano contra zumbis',
+    '+3 de dano contra fantasmas',
+    '+3 de dano contra bestas',
+    '+3 de dano contra vampiros',
+    '+3 de dano contra múmias',
+    '+3 de dano contra esqueletos',
+    '+3 de dano de fogo',
+    '+3 de dano de gelo',
+    '+3 de dano de veneno',
+    '+3 de dano de ácido',
+    '+3 de dano necrótico',
+    '+3 de dano',
+    '-3 de dano',
+    'Com 3 esforços de Potência, provoca +1d8 de dano',
+    'Com 3 esforços de Potência, provoca 6 de dano',
+    'Com 3 esforços de Velocidade, provoca +1d8 de dano',
+    'Com 3 esforços de Velocidade, provoca 6 de dano',
+    'Com 3 esforços de Intelecto, provoca +1d8 de dano',
+    'Com 3 esforços de Intelecto, provoca 6 de dano',
+    'Reduz a dificuldade em 2 passos',
+    'Efeito Menor: deixa o inimigo atordoado por 3 turnos',
+    'Efeito Menor: cega o inimigo por 3 turnos',
+    'Efeito Menor: apavora o inimigo por 3 turnos',
+    'Efeito Menor: recupera 2 pontos de Potência',
+    'Efeito Menor: recupera 2 pontos de Velocidade',
+    'Efeito Menor: recupera 2 pontos de Intelecto',
+    'Efeito Menor: recupera 2 pontos de atributo',
+    'Efeito Maior: deixa o inimigo atordoado por 3 turnos',
+    'Efeito Maior: cega o inimigo por 3 turnos',
+    'Efeito Maior: apavora o inimigo por 3 turnos',
+    'Efeito Maior: recupera 2 pontos de Potência',
+    'Efeito Maior: recupera 2 pontos de Velocidade',
+    'Efeito Maior: recupera 2 pontos de Intelecto',
+    'Efeito Maior: recupera 2 pontos de atributo'
+  ],
+  // LEVEL 4
+  [
+    '+1d4 de dano contra zumbis',
+    '+1d4 de dano contra zumbis',
+    '+1d4 de dano contra fantasmas',
+    '+1d4 de dano contra bestas',
+    '+1d4 de dano contra vampiros',
+    '+1d4 de dano contra múmias',
+    '+1d4 de dano contra esqueletos',
+    '+1d4 de dano de fogo',
+    '+1d4 de dano de gelo',
+    '+1d4 de dano de veneno',
+    '+1d4 de dano de ácido',
+    '+1d4 de dano necrótico',
+    '+1d4 de dano',
+    'Efeito Menor: recupera 1d4 pontos de Potência',
+    'Efeito Menor: recupera 1d4 pontos de Velocidade',
+    'Efeito Menor: recupera 1d4 pontos de Intelecto',
+    'Efeito Menor: recupera 1d4 pontos de atributo',
+    'Efeito Maior: recupera 1d4 pontos de Potência',
+    'Efeito Maior: recupera 1d4 pontos de Velocidade',
+    'Efeito Maior: recupera 1d4 pontos de Intelecto',
+    'Efeito Maior: recupera 1d4 pontos de atributo'
+  ],
+  // LEVEL 5
+  [
+    '+1d6 de dano contra zumbis',
+    '+1d6 de dano contra zumbis',
+    '+1d6 de dano contra fantasmas',
+    '+1d6 de dano contra bestas',
+    '+1d6 de dano contra vampiros',
+    '+1d6 de dano contra múmias',
+    '+1d6 de dano contra esqueletos',
+    '+1d6 de dano de fogo',
+    '+1d6 de dano de gelo',
+    '+1d6 de dano de veneno',
+    '+1d6 de dano de ácido',
+    '+1d6 de dano necrótico',
+    '+1d6 de dano',
+    'Efeito Menor: recupera 1d6 pontos de Potência',
+    'Efeito Menor: recupera 1d6 pontos de Velocidade',
+    'Efeito Menor: recupera 1d6 pontos de Intelecto',
+    'Efeito Menor: recupera 1d6 pontos de atributo',
+    'Efeito Maior: recupera 1d6 pontos de Potência',
+    'Efeito Maior: recupera 1d6 pontos de Velocidade',
+    'Efeito Maior: recupera 1d6 pontos de Intelecto',
+    'Efeito Maior: recupera 1d6 pontos de atributo'
+  ],
+  // LEVEL 6
+  [
+    'Efeito Menor: destrói zumbis',
+    'Efeito Menor: destrói fantasmas',
+    'Efeito Menor: destrói bestas',
+    'Efeito Menor: destrói múmias',
+    'Efeito Menor: destrói esqueletos',
+    'Efeito Maior: destrói zumbis',
+    'Efeito Maior: destrói fantasmas',
+    'Efeito Maior: destrói bestas',
+    'Efeito Maior: destrói múmias',
+    'Efeito Maior: destrói esqueletos',
+    '+1d4 de dano',
+    '+1d6 de dano',
+    '+1d8 de dano'
+  ]
+];
+
+let NOTAS_CAJADOS_IMEDIATO = [
+  'Provê iluminação azulada por 10 metros',
+  'Provê luz branca por 10 metros',
+  'Emite brilho esverdeado se zumbis estiverem próximos',
+  'Emite brilho prateado se fantasmas estiverem próximos',
+  'Emite brilho azulado se bestas estiverem próximas',
+  'Emite brilho alaranjado se múmias estiverem próximas',
+  'Emite brilho amarelado se esqueletos estiverem próximos',
+  'Emite brilho avermelhado se vampiros estiverem próximos',
+  'Forjado com ossos de lobisomem (vibra se existir vampiros próximos)',
+  'É capaz de purificar água pelo simples toque',
+  'Aumenta a dificuldade de Iniciativa em 1 passo',
+  'Reduz 1 ponto de Velocidade',
+  'Aumenta 1 ponto de Intelecto'
+];
+
+let NOTAS_CAJADOS_CURTO = [
+  'Dispara projéteis de energia em forma de flecha',
+  'Dispara globos de energia negra',
+  'Dispara projéteis de energia em formato de estrela',
+  'Dispara projéteis vermelhos em formato de guarras',
+  'Dispara setas de espinhos',
+  'Dispara correntes brancas de energia',
+  'Dispara correntes vermelhas de energia',
+  'Dispara correntes de energia azul',
+  'Dispara correntes de energia negra',
+  'Dispara globos incandescentes',
+  'Dispara lâminas de energia cósmica',
+  'Dispara lâminas de energia solar (+1 contra vampiros)',
+  'Dispara adagas abençoadas (+1 contra zumbis)',
+  'Dispara um foco de explosão lunar',
+  'Dispara uma corda mágica de energia'
+];
+
+let NOTAS_CHICOTE = [
+  'Afasta o inimigo por 1 metro',
+  'Afasta o inimigo por 2 metros',
+  'Com 1 esforço de Potência, afasta o inimigo por 4 metros',
+  'Com 1 esforço de Potência, afasta o inimigo por 1d6 metros',
+  'Aproxima o inimigo em 1 metro',
+  'Aproxima o inimigo em 2 metros',
+  'Com 1 esforço de Potência, aproxima o inimigo em 4 metros',
+  'Com 1 esforço de Potência, aproxima o inimigo em 1d6 metros',
+  'Provoca um efeito sonoro estalado ao acertar',
+  'Trançado com cordas de cânhamo do deserto da perdição',
+  'Trançado com cordas de cânhamo da floresta sombria',
+  'Trançado com cordas de cânhamo abençoadas (+1 contra zumbis)',
+  'Trançado com cordas de cânhamo douradas',
+  'Trançado com pelo de bestas selvagens',
+  'Trançado com pelo de lobisomem (vibra se existir vampiros próximos)',
+  'Trançado com cabelos de ciclopes',
+  'Forjado com correntes malignas',
+  'Forjado com correntes das prisões de abismo',
+  'Forjado com correntes de prata (brilha se fantasmas estiverem próximos)',
+  'Forjado com bronze amaldiçoado',
+  'Banhado com sangue de leão (+1 contra múmias)',
+  'Reduz a dificuldade em 1 nos testes de escalada'
+];
+
+let NOTAS_ESPADA = [
+  'Forjada com aço enegrecido',
+  'Forjada com aço abençoado (+1 contra zumbis)',
+  'Forjada com aço enriquecido (se rolar de 16 à 20, quebra o escudo do inimigo)',
+  'Forjada com aço incandescente (+1 de dano contra esqueletos)',
+  'Forjada com ferro azulado (brilha no escuro)',
+  'Forjada com ferro lascado (-1 de dano)',
+  'Forjada com bronze lascado (Reduz a dificuldade de ataque em 1 passo)',
+  'Forjada com prata (+1 de dano contra fantasmas)',
+  'Forjada com lâminas de energia solar (+1 contra vampiros)',
+  'Emite brilho esverdeado se zumbis estiverem próximos',
+  'Emite brilho prateado se fantasmas estiverem próximos',
+  'Emite brilho azulado se bestas estiverem próximas',
+  'Forjada com lâmina venenosa (+1 de dano contra bestas)',
+  'Forjada com metal desconhecido',
+  'Forjada com metal raro',
+  'Forjada com metal brilhante (brilha no escuro)',
+  'Forjada com raios cósmicos',
+  'Lâmina desbalanceada (-1 de dano)',
+  'Empunhadura desbalanceada (-1 de dano)',
+  'Peso desproporcional (-1 de dano)',
+  'Grafada com runas antigas',
+  'Grafada com runas do tempo (brilha a noite)',
+  'Grafada com escrita vampírica (+1 contra vampiros)',
+  'Amassada',
+  'Enferrujada'
+];
+
+let NOMES = [
+  'Twister',
+  'Infinity',
+  'The Facelifter',
+  'Forsaken',
+  'Spellblade',
+  'Destiny',
+  'Bandit',
+  'Doomblade',
+  'Cataclysm',
+  'Frost',
+  'Diamond',
+  'Darkheart',
+  'Memory of Cunning',
+  'Ebon',
+  'Ferocious',
+  'Judgement',
+  'Kris',
+  'Phantom',
+  'Sculptor',
+  'Meteor',
+  'Narcoleptic',
+  'Echo',
+  'Legacy',
+  'Black',
+  'Nightfall',
+  'Fierce',
+  'Razor',
+  'Obsidian',
+  'Firesoul',
+  'Protector',
+  'Brutality',
+  'Guardian',
+  'Heartseeker',
+  'Interrogator',
+  'Nightcrackle',
+  'Solarflare',
+  'Remorse',
+  'Piece Maker',
+  'Betrayer',
+  'Lazarus',
+  'Adamantite',
+  'Amnesia',
+  'Lightning',
+  'Mageblade',
+  'Mystery',
+  'Bones',
+  'Fortune',
+  'Prick',
+  'Vicious',
+  'Titanium',
+  'Riata',
+  'Desolation',
+  'Requiem',
+  'Tenderiser',
+  'Typhoon',
+  'Rune-Forged',
+  'Lasso',
+  'Doombringer',
+  'Ender of Decay',
+  'Corroded',
+  'Guardian of Cruelty',
+  'Honor',
+  'Nirvana',
+  'Scourgeborne',
+  'Convergence',
+  'Termination',
+  'Corrupted',
+  'Stormherald',
+  'Limbo',
+  'Rage',
+  'Slayer of Denial',
+  'Severance',
+  'Defiling Wire',
+  'Last Rites',
+  'Vengeance',
+  'Patience',
+  'Soul of Secrecy',
+  'Tremor',
+  'Heartcrusher',
+  'Pact of Zeal',
+  'Vanquisher',
+  'Stormedge',
+  'Bronze',
+  'Gold',
+  'Medal',
+  'Hungering',
+  'Snare',
+  'Sunwalker',
+  'Grieving',
+  'Mithril',
+  'Knightly',
+  'Vindictive',
+  'Glass',
+  'Heinous',
+  'Last Rites',
+  'Orbit',
+  'Restored',
+  'Arcane Steel',
+  'Arcane',
+  'Improved',
+  'Trauma',
+  'Catastrophe',
+  'Wind-Forged',
+  'Infused',
+  'Seismic',
+  'Betrayal',
+  'Blackout',
+  'Guardian',
+  'Unholy Might',
+  'Dark',
+  'Abomination',
+  'Cryptmaker',
+  'Fiery',
+  'Hungering',
+  'Savage Steel',
+  'Savage',
+  'Last Word',
+  'Vengeance',
+  'Dirt',
+  'Rascal',
+  'Garbage',
+  'Mediocre',
+  'Baseborn',
+  'Edmond\'s',
+  'Eduardus\'s',
+  'Elweard\'s',
+  'Aleksanteri\'s',
+  'Dilip\'s',
+  'Skyler\'s',
+  'Ramon\'s',
+  'Sigmundr\'s',
+  'Alewar\'s',
+  'Pharamond\'s',
+  'Alessandre\'s',
+  'Alexandra\'s',
+  'Neda\'s',
+  'Sondra\'s',
+  'Thorbjörg\'s',
+  'Raimunda\'s',
+  'Hildegarde\'s',
+  'Sharmila\'s',
+  'Edmonda\'s',
+  'Rosemonde\'s',
+  'Viktor\'s',
+  'Brandyn\'s',
+  'Alaric\'s',
+  'Lucien\'s',
+  'Bertram\'s',
+  'Josephine\'s',
+  'Ursuline\'s',
+  'Amelia\'s',
+  'Selene\'s',
+  'Kala\'s',
+  'Helen\'s',
+  'Ennata\'s',
+  'Parthena\'s',
+  'Xylia\'s',
+  'Mora\'s',
+  'Jacqueline\'s',
+  'Kalonice\'s',
+  'Tourmaline\'s',
+  'Lestat\'s',
+  'Colin\'s',
+  'Danag\'s',
+  'Lauden\'s'
+];
