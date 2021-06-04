@@ -26,6 +26,68 @@ header img {
   display: block;
   margin: 0 auto 6px auto;
 }
+
+nav {
+  width: 400px;
+  border: 0;
+  padding: 0;
+
+  display: block;
+  margin: 0 auto 10px auto;
+}
+nav::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+nav > button[type=button] {
+  display: block;
+  float: left;
+  margin-right: 5px;
+  border: 0;
+  border-radius: 0;
+  border-top: 1px solid #212121;
+  border-left: 1px solid #212121;
+  border-bottom: 1px solid #515151;
+  border-right: 1px solid #515151;
+  box-shadow: 2px 2px 2px #000;
+  width: 190px;
+}
+
+nav > button[type=button].direita {
+  float: right;
+}
+
+nav > button[type=button]::after {
+  content: '';
+  display: block;
+  height: 0;
+  clear: both;
+}
+
+nav > button[type=button] > span {
+  margin: 0 10px 0 10px;
+  line-height: 40px;
+  padding: 0;
+  border: 0;
+  font-size: 1.8em;
+  color: #212121;
+  font-weight: bold;
+  text-shadow: 1px;
+  display: block;
+  float: left;
+}
+
+nav > button[type=button] > img {
+  height: 40px;
+  margin: 0 0 0 5px;
+  padding: 0;
+  border: 0;
+  display: block;
+  float: left;
+}
+
 main {
   width: 400px;
   border: 0;
@@ -85,6 +147,9 @@ main div.arma {
 
   display: block;
   float: left;
+
+  position: relative;
+  min-height: 170px;
 }
 
 main div.arma::after {
@@ -92,6 +157,38 @@ main div.arma::after {
   display: block;
   height: 0;
   clear: both;
+}
+
+main div.arma div.backpack {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  white-space: nowrap;
+}
+
+main div.arma div.backpack-salvar {
+  background-image: url('../img/backpack_salvar.png');
+  left: 32px;
+  top: 110px;
+}
+main div.arma div.backpack-remover {
+  background-image: url('../img/backpack_remover.png');
+  left: 7px;
+  top: 110px;
+}
+main div.arma div.hand-add {
+  background-image: url('../img/hand_add.png');
+  left: 57px;
+  top: 110px;
+}
+main div.arma div.hand-remove {
+  background-image: url('../img/hand_remove.png');
+  left: 57px;
+  top: 110px;
 }
 
 main div.arma > div.background-imagem {

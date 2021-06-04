@@ -12,7 +12,28 @@
       <img src="img/logo3.png" />
     </header>
 
-    <main>
+    <nav>
+      <button type="button" id="botao_menu_rolagens">
+        <img src="img/menu_v2.png">
+        <span>Rolagens</span>
+      </button>
+      <button type="button" class="direita" id="botao_menu_inventario">
+        <img src="img/menu_v1.png">
+        <span>Inventário</span>
+      </button>
+    </nav>
+
+    <main id="menu_inventario">
+      <h1 class="maior">Itens Equipados</h1>
+      <div class="lista" id="itens_equipados">
+      </div>
+
+      <h1 class="maior">Inventário</h1>
+      <div class="lista" id="itens_iventario">
+      </div>
+    </main>
+
+    <main id="menu_rolagens">
 
       <form id="rolar">
         <h2>Rolagens de Itens</h2>
@@ -81,8 +102,10 @@
 
     </main>
 
+    <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
     <script type="text/javascript" src="js/dados.js"></script>
     <script type="text/javascript" src="js/sortear.js"></script>
     <script type="text/javascript" src="js/render.js"></script>
+    <script type="text/javascript" src="js/banco.js"></script>
   </body>
 </html>

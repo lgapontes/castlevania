@@ -22,7 +22,7 @@ function sortearNotas(lista,callback) {
     if (level_sorteado == 0) {
       callback(notas);
     } else {
-      for(let j=0; j<level_sorteado; j++) {        
+      for(let j=0; j<level_sorteado; j++) {
         sortearNota(lista,nota => {
           notas.push(nota);
           if (j == (level_sorteado - 1)) {
@@ -123,7 +123,22 @@ function sortearReliquia() {
               let imagem = 'reliquia_' + valor + '.png';
               let nome = NOMES[indexNome] + ' Jewel';
               let detalhe = DETALHES_RELIQUIAS[0][detalhe_index];
-              renderReliquia(nome,imagem,(nivel_reliquia + 1),detalhe,gold);
+
+              json = {
+                tipo_objeto: RENDER_RELIQUIA,
+                dados: {
+                  nome: nome,
+                  imagem: imagem,
+                  nivel: (nivel_reliquia + 1),
+                  detalhe: detalhe,
+                  gold: gold
+                }
+              };
+
+              json.equipado = false;
+              json.inventario = false;
+              json.uuid = uuidv4();
+              render(json);
             });
           });
         });
@@ -152,7 +167,23 @@ function sortearPocao() {
                   }
                   let imagem = 'pocao_' + valor + '.png';
                   let nome = NOMES[indexNome] + ' Potion';
-                  renderPocao(nome,imagem,detalhe,maldicao,(nivel_pocao + 1),gold);
+
+                  json = {
+                    tipo_objeto: RENDER_POCAO,
+                    dados: {
+                      nome: nome,
+                      imagem: imagem,
+                      detalhe: detalhe,
+                      maldicao: maldicao,
+                      nivel: (nivel_pocao + 1),
+                      gold: gold
+                    }
+                  };
+
+                  json.equipado = false;
+                  json.inventario = false;
+                  json.uuid = uuidv4();
+                  render(json);
                 });
               });
             });
@@ -179,7 +210,22 @@ function sortearArmadura() {
                 let tipo = 'armadura_leve';
                 let imagem = 'robe_' + valor + '.png';
                 let nome = NOMES[indexNome] + ' ' + NOMES_ARMADURAS[valorNomeArmadura];
-                renderArmadura(nome,imagem,tipo,notas,gold);
+
+                json = {
+                  tipo_objeto: RENDER_ARMADURA,
+                  dados: {
+                    nome: nome,
+                    imagem: imagem,
+                    tipo: tipo,
+                    notas: notas,
+                    gold: gold
+                  }
+                };
+
+                json.equipado = false;
+                json.inventario = false;
+                json.uuid = uuidv4();
+                render(json);
               });
             });
           });
@@ -200,7 +246,22 @@ function sortearArmadura() {
                     let tipo = 'armadura_média';
                     let imagem = 'robe_' + valor + '.png';
                     let nome = NOMES[indexNome] + ' ' + NOMES_ARMADURAS[valorNomeArmadura];
-                    renderArmadura(nome,imagem,tipo,notas,gold);
+
+                    json = {
+                      tipo_objeto: RENDER_ARMADURA,
+                      dados: {
+                        nome: nome,
+                        imagem: imagem,
+                        tipo: tipo,
+                        notas: notas,
+                        gold: gold
+                      }
+                    };
+
+                    json.equipado = false;
+                    json.inventario = false;
+                    json.uuid = uuidv4();
+                    render(json);
                   });
                 });
               });
@@ -217,7 +278,22 @@ function sortearArmadura() {
                     let tipo = 'armadura_média';
                     let imagem = 'armadura_' + valor + '.png';
                     let nome = NOMES[indexNome] + ' ' + NOMES_ARMADURAS[valorNomeArmadura];
-                    renderArmadura(nome,imagem,tipo,notas,gold);
+
+                    json = {
+                      tipo_objeto: RENDER_ARMADURA,
+                      dados: {
+                        nome: nome,
+                        imagem: imagem,
+                        tipo: tipo,
+                        notas: notas,
+                        gold: gold
+                      }
+                    };
+
+                    json.equipado = false;
+                    json.inventario = false;
+                    json.uuid = uuidv4();
+                    render(json);
                   });
                 });
               });
@@ -240,7 +316,22 @@ function sortearArmadura() {
                 let tipo = 'armadura_pesada';
                 let imagem = 'armadura_' + valor + '.png';
                 let nome = NOMES[indexNome] + ' ' + NOMES_ARMADURAS[valorNomeArmadura];
-                renderArmadura(nome,imagem,tipo,notas,gold);
+
+                json = {
+                  tipo_objeto: RENDER_ARMADURA,
+                  dados: {
+                    nome: nome,
+                    imagem: imagem,
+                    tipo: tipo,
+                    notas: notas,
+                    gold: gold
+                  }
+                };
+
+                json.equipado = false;
+                json.inventario = false;
+                json.uuid = uuidv4();
+                render(json);
               });
             });
           });
@@ -262,7 +353,22 @@ function sortearEscudo() {
           let tipo = 'escudo';
           let imagem = 'escudo_' + valor + '.png';
           let nome = NOMES[indexNome] + ' Shield';
-          renderEscudo(nome,imagem,tipo,notas,gold);
+
+          json = {
+            tipo_objeto: RENDER_ESCUDO,
+            dados: {
+              nome: nome,
+              imagem: imagem,
+              tipo: tipo,
+              notas: notas,
+              gold: gold
+            }
+          };
+
+          json.equipado = false;
+          json.inventario = false;
+          json.uuid = uuidv4();
+          render(json);
         });
       });
     });
@@ -286,7 +392,23 @@ function sortearArma() {
                 let nome = NOMES[indexNome] + ' ' + sufixo_nome;
                 let alcance = 'Imediato';
                 notas.push('Pode ser arremessada até alcance curto');
-                renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                json = {
+                  tipo_objeto: RENDER_ARMA,
+                  dados: {
+                    nome: nome,
+                    imagem: imagem,
+                    tipo: tipo,
+                    alcance: alcance,
+                    notas: notas,
+                    gold: gold
+                  }
+                };
+
+                json.equipado = false;
+                json.inventario = false;
+                json.uuid = uuidv4();
+                render(json);
               });
             });
           });
@@ -327,7 +449,22 @@ function sortearArma() {
                       notas.push('Os projéteis alcançam 15 metros');
                     }
 
-                    renderArma(nome,imagem,tipo,alcance,notas,gold);
+                    json = {
+                      tipo_objeto: RENDER_ARMA,
+                      dados: {
+                        nome: nome,
+                        imagem: imagem,
+                        tipo: tipo,
+                        alcance: alcance,
+                        notas: notas,
+                        gold: gold
+                      }
+                    };
+
+                    json.equipado = false;
+                    json.inventario = false;
+                    json.uuid = uuidv4();
+                    render(json);
 
                   });
                 });
@@ -354,7 +491,23 @@ function sortearArma() {
                   if (indexNotaChicote < NOTAS_CHICOTE.length) {
                     notas.push(NOTAS_CHICOTE[indexNotaChicote]);
                   }
-                  renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                  json = {
+                    tipo_objeto: RENDER_ARMA,
+                    dados: {
+                      nome: nome,
+                      imagem: imagem,
+                      tipo: tipo,
+                      alcance: alcance,
+                      notas: notas,
+                      gold: gold
+                    }
+                  };
+
+                  json.equipado = false;
+                  json.inventario = false;
+                  json.uuid = uuidv4();
+                  render(json);
                 });
               });
             });
@@ -378,7 +531,23 @@ function sortearArma() {
                 let alcance = 'Curto';
                 notas.push('Se utilizado para distâncias longas, aumenta 2 níveis de dificuldade');
                 notas.push('Deve ser utilizado com duas mãos');
-                renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                json = {
+                  tipo_objeto: RENDER_ARMA,
+                  dados: {
+                    nome: nome,
+                    imagem: imagem,
+                    tipo: tipo,
+                    alcance: alcance,
+                    notas: notas,
+                    gold: gold
+                  }
+                };
+
+                json.equipado = false;
+                json.inventario = false;
+                json.uuid = uuidv4();
+                render(json);
 
               });
             });
@@ -403,7 +572,23 @@ function sortearArma() {
                   if (indexNotaEspada < NOTAS_ESPADA.length) {
                     notas.push(NOTAS_ESPADA[indexNotaEspada]);
                   }
-                  renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                  json = {
+                    tipo_objeto: RENDER_ARMA,
+                    dados: {
+                      nome: nome,
+                      imagem: imagem,
+                      tipo: tipo,
+                      alcance: alcance,
+                      notas: notas,
+                      gold: gold
+                    }
+                  };
+
+                  json.equipado = false;
+                  json.inventario = false;
+                  json.uuid = uuidv4();
+                  render(json);
                 });
               });
             });
@@ -426,7 +611,23 @@ function sortearArma() {
                 let nome = NOMES[indexNome] + ' ' + sufixo_nome;
                 let alcance = 'Longo';
                 notas.push('Deve ser utilizado com duas mãos');
-                renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                json = {
+                  tipo_objeto: RENDER_ARMA,
+                  dados: {
+                    nome: nome,
+                    imagem: imagem,
+                    tipo: tipo,
+                    alcance: alcance,
+                    notas: notas,
+                    gold: gold
+                  }
+                };
+
+                json.equipado = false;
+                json.inventario = false;
+                json.uuid = uuidv4();
+                render(json);
 
               });
             });
@@ -469,7 +670,23 @@ function sortearArma() {
                     }
 
                     notas.push('Deve ser utilizado com duas mãos');
-                    renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                    json = {
+                      tipo_objeto: RENDER_ARMA,
+                      dados: {
+                        nome: nome,
+                        imagem: imagem,
+                        tipo: tipo,
+                        alcance: alcance,
+                        notas: notas,
+                        gold: gold
+                      }
+                    };
+
+                    json.equipado = false;
+                    json.inventario = false;
+                    json.uuid = uuidv4();
+                    render(json);
 
                   });
                 });
@@ -496,7 +713,23 @@ function sortearArma() {
                   if (indexNotaChicote < NOTAS_CHICOTE.length) {
                     notas.push(NOTAS_CHICOTE[indexNotaChicote]);
                   }
-                  renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                  json = {
+                    tipo_objeto: RENDER_ARMA,
+                    dados: {
+                      nome: nome,
+                      imagem: imagem,
+                      tipo: tipo,
+                      alcance: alcance,
+                      notas: notas,
+                      gold: gold
+                    }
+                  };
+
+                  json.equipado = false;
+                  json.inventario = false;
+                  json.uuid = uuidv4();
+                  render(json);
                 });
               });
             });
@@ -542,7 +775,23 @@ function sortearArma() {
                    }
 
                     notas.push('Deve ser utilizado com duas mãos');
-                    renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                    json = {
+                      tipo_objeto: RENDER_ARMA,
+                      dados: {
+                        nome: nome,
+                        imagem: imagem,
+                        tipo: tipo,
+                        alcance: alcance,
+                        notas: notas,
+                        gold: gold
+                      }
+                    };
+
+                    json.equipado = false;
+                    json.inventario = false;
+                    json.uuid = uuidv4();
+                    render(json);
 
                   });
                 });
@@ -570,7 +819,24 @@ function sortearArma() {
                     notas.push(NOTAS_CHICOTE[indexNotaChicote]);
                   }
                   notas.push('Deve ser utilizado com duas mãos');
-                  renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                  json = {
+                    tipo_objeto: RENDER_ARMA,
+                    dados: {
+                      nome: nome,
+                      imagem: imagem,
+                      tipo: tipo,
+                      alcance: alcance,
+                      notas: notas,
+                      gold: gold
+                    }
+                  };
+
+                  json.equipado = false;
+                  json.inventario = false;
+                  json.uuid = uuidv4();
+                  render(json);
+
                 });
               });
             });
@@ -596,7 +862,24 @@ function sortearArma() {
                     notas.push(NOTAS_ESPADA[indexNotaEspada]);
                   }
                   notas.push('Deve ser utilizado com duas mãos');
-                  renderArma(nome,imagem,tipo,alcance,notas,gold);
+
+                  json = {
+                    tipo_objeto: RENDER_ARMA,
+                    dados: {
+                      nome: nome,
+                      imagem: imagem,
+                      tipo: tipo,
+                      alcance: alcance,
+                      notas: notas,
+                      gold: gold
+                    }
+                  };
+
+                  json.equipado = false;
+                  json.inventario = false;
+                  json.uuid = uuidv4();
+                  render(json);
+
                 });
               });
             });

@@ -1,9 +1,3 @@
-const RENDER_ARMA = 'arma';
-const RENDER_ESCUDO = 'escudo';
-const RENDER_ARMADURA = 'armadura';
-const RENDER_RELIQUIA = 'reliquia';
-const RENDER_POCAO = 'pocao';
-
 /*
   adaga_41.png
   arco_v32.png
