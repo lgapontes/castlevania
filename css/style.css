@@ -180,6 +180,11 @@ main div.arma div.backpack-remover {
   left: 7px;
   top: 110px;
 }
+main div.arma div.backpack-remover-cifras {
+  background-image: url('../img/backpack_remover.png');
+  left: 32px;
+  top: 110px;
+}
 main div.arma div.hand-add {
   background-image: url('../img/hand_add.png');
   left: 57px;
@@ -269,6 +274,14 @@ main h1.maior {
   background-size: 360px;
 }
 
+main h1.cifras input[type=number] {
+  width: 40px;
+  font-size: 1em;
+  color: #babab2;
+  background-color: #090909;
+  border: 0;
+}
+
 main form > h2 {
   font-size: 1.4em;
   font-weight: bold;
@@ -332,4 +345,48 @@ main form > button[type=submit] > img {
   border: 0;
   display: block;
   float: left;
+}
+
+main form > div a {
+  color: #babab2;
+}
+
+main form > div.videowrapper {
+    float: none;
+    clear: both;
+    width: 375px;
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 25px;
+    height: 0;
+}
+main form > div.videowrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+main div.lista div.mensagem {
+  width: 400px;
+  background: rgba(100, 100, 100, 0.3);
+  box-sizing: border-box;
+  padding: 4px;
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #202020;
+  line-height: 25px;
+}
+
+span.final {
+  height: 200px;
+  display: block;
+  border: 0;
+  margin: 0;
+  padding: 0;
 }

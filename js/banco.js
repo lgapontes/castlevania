@@ -5,6 +5,7 @@ function __carregarDoBanco(callback) {
   let retrievedObject = localStorage.getItem(NOME_BANCO);
   if ( (retrievedObject == undefined) || (retrievedObject == null) || (retrievedObject == '') ) {
     json = {
+      cifras: 1,
       itens: []
     };
   } else {
@@ -97,8 +98,17 @@ function __removerDoBanco(item_removido,callback) {
   });
 }
 
+function __atualizarMaximoCifras(cifras,callback) {
+  __carregarDoBanco(json => {
+    json.cifras = cifras;
+    localStorage.setItem(NOME_BANCO, JSON.stringify(json));
+    callback(json);
+  });
+}
+
 const BANCO = {
   salvar: __salvarNoBanco,
   carregar: __carregarDoBanco,
-  remover: __removerDoBanco
+  remover: __removerDoBanco,
+  cifras: __atualizarMaximoCifras
 };

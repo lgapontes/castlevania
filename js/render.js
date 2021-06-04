@@ -364,13 +364,19 @@ function renderBackpack(divName,divExterna,json) {
     divExterna.appendChild(renderBackpackSalvar(divExterna,json));
     document.getElementById(divName).appendChild(divExterna);
   } else {
-    divExterna.appendChild(renderBackpackRemover(divExterna,json));
-    if (json.equipado == true) {
-      divExterna.appendChild(renderBackpackHandRemove(divExterna,json));
-      document.getElementById('itens_equipados').appendChild(divExterna);
+
+    if ( (json.tipo_objeto == 'reliquia') || (json.tipo_objeto == 'pocao') ) {
+      divExterna.appendChild(renderBackpackRemover(divExterna,json,true));
+      document.getElementById('itens_cifras').appendChild(divExterna);
     } else {
-      divExterna.appendChild(renderBackpackHandAdd(divExterna,json));
-      document.getElementById('itens_iventario').appendChild(divExterna);
+      divExterna.appendChild(renderBackpackRemover(divExterna,json,false));
+      if (json.equipado == true) {
+        divExterna.appendChild(renderBackpackHandRemove(divExterna,json));
+        document.getElementById('itens_equipados').appendChild(divExterna);
+      } else {
+        divExterna.appendChild(renderBackpackHandAdd(divExterna,json));
+        document.getElementById('itens_iventario').appendChild(divExterna);
+      }
     }
   }
 }
@@ -388,9 +394,13 @@ function renderBackpackSalvar(divExterna,json) {
   return div;
 }
 
-function renderBackpackRemover(divExterna,json) {
+function renderBackpackRemover(divExterna,json,cifras) {
   let div =  document.createElement("div");
-  div.className = 'backpack backpack-remover';
+  if (cifras) {
+    div.className = 'backpack backpack-remover-cifras';
+  } else {
+    div.className = 'backpack backpack-remover';
+  }
   div.addEventListener('click',event => {
     event.preventDefault();
     json.inventario = false;
@@ -439,7 +449,13 @@ function main(quantidade_armas,quantidade_escudos,quantidade_armaduras,quantidad
       sortearItens(quantidade_armaduras,sortearArmadura,() => {
         sortearItens(quantidade_reliquias,sortearReliquia,() => {
           sortearItens(quantidade_pocoes,sortearPocao,() => {
-            console.log('Itens sorteados!');
+
+            renderMensagem('armas');
+            renderMensagem('escudos');
+            renderMensagem('armaduras');
+            renderMensagem('reliquias');
+            renderMensagem('pocoes');
+
           });
         });
       });
@@ -451,10 +467,145 @@ function inventario() {
   BANCO.carregar(json => {
     document.getElementById('itens_equipados').innerHTML = '';
     document.getElementById('itens_iventario').innerHTML = '';
-    json.itens.forEach((item, index) => {
-      render(item);
-    });
+    document.getElementById('itens_cifras').innerHTML = '';
+    document.getElementById('maximo_cifras').value = json.cifras;
+
+    if (json.itens.length == 0) {
+      renderMensagem('itens_equipados');
+      renderMensagem('itens_iventario');
+      renderMensagem('itens_cifras');
+    } else {
+      json.itens.forEach((item, index) => {
+        render(item);
+        if (index == (json.itens.length - 1)) {
+          renderMensagem('itens_equipados');
+          renderMensagem('itens_iventario');
+          renderMensagem('itens_cifras');
+        }
+      });
+    }
   });
+}
+
+function __debugItem() {
+
+  // ITEM
+  {
+    let item = {
+      dados: {
+        alcance: 'Imediato',
+        gold: 5,
+        imagem: 'tocha.png',
+        nome: 'Tocha Simples',
+        notas: [ 'Aumenta a iluminação por 10 metros' ],
+        tipo: 'leve'
+      },
+      equipado: true,
+      inventario: true,
+      tipo_objeto: RENDER_ARMA,
+      uuid: uuidv4()
+    };
+    BANCO.salvar(item,itens => {});
+  }
+
+  // ITEM
+  {
+    let item = {
+      dados: {
+        alcance: 'Imediato',
+        gold: 80,
+        imagem: 'espada_13.png',
+        nome: 'Adamantite Saber',
+        notas: [],
+        tipo: 'médio'
+      },
+      equipado: true,
+      inventario: true,
+      tipo_objeto: RENDER_ARMA,
+      uuid: uuidv4()
+    };
+    BANCO.salvar(item,itens => {});
+  }
+
+  // ITEM
+  {
+    let item = {
+      dados: {
+        gold: 90,
+        imagem: 'armadura_15.png',
+        nome: 'Kalonice\'s Fullplate',
+        notas: [ '+2 Armadura. Aumenta 2 custos por nível de esforço em Velocidade' ],
+        tipo: 'armadura_média'
+      },
+      equipado: true,
+      inventario: true,
+      tipo_objeto: RENDER_ARMADURA,
+      uuid: uuidv4()
+    };
+    BANCO.salvar(item,itens => {});
+  }
+
+  // ITEM
+  {
+    let item = {
+      dados: {
+        gold: 105,
+        imagem: 'escudo_28.png',
+        nome: 'Bronze Shield',
+        notas: [],
+        tipo: 'escudo'
+      },
+      equipado: false,
+      inventario: true,
+      tipo_objeto: RENDER_ESCUDO,
+      uuid: uuidv4()
+    };
+    BANCO.salvar(item,itens => {});
+  }
+
+  // ITEM
+  {
+    let item = {
+      dados: {
+        gold: 96,
+        imagem: 'escudo_5.png',
+        nome: 'Medal Shield',
+        notas: [ 'Forjado com mithril' ],
+        tipo: 'escudo'
+      },
+      equipado: true,
+      inventario: true,
+      tipo_objeto: RENDER_ESCUDO,
+      uuid: uuidv4()
+    };
+    BANCO.salvar(item,itens => {});
+  }
+
+  // ITEM
+  {
+    let item = {
+      dados: {
+        alcance: 'Longo',
+        gold: 54,
+        imagem: 'arco_v29.png',
+        nome: 'Cryptmaker Shortbow',
+        notas: [ 'Com 1 esforço de Intelecto, provoca +1d4 de dano', 'Deve ser utilizado com duas mãos' ],
+        tipo: 'médio'
+      },
+      equipado: true,
+      inventario: true,
+      tipo_objeto: RENDER_ARMA,
+      uuid: uuidv4()
+    };
+    BANCO.salvar(item,itens => {});
+  }
+
+}
+
+function renderMensagem(lista) {
+  if (document.getElementById(lista).innerHTML == '') {
+    document.getElementById(lista).innerHTML = '<div class="mensagem">Nenhum item encontrado!</div>';
+  }
 }
 
 document.getElementById('botao_menu_inventario').addEventListener('click',event => {
@@ -468,6 +619,11 @@ document.getElementById('botao_menu_rolagens').addEventListener('click',event =>
   document.getElementById('menu_inventario').style.display = 'none';
   document.getElementById('menu_rolagens').style.display = 'block';
 });
+document.getElementById('maximo_cifras').addEventListener('change',event => {
+  event.preventDefault();
+  let cifras = parseInt(event.target.value);
+  BANCO.cifras(cifras, json => {});
+});
 
 document.getElementById('menu_inventario').style.display = 'none';
-main(1,1,1,1,1);
+main(3,3,3,3,3);

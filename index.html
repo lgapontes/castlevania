@@ -12,6 +12,18 @@
       <img src="img/logo3.png" />
     </header>
 
+    <main>
+      <form>
+        <h2>Campanha de Castlevania</h2>
+        <hr>
+        <div>Este gerador foi criado para suportar a campanha de ChatQuest de Castlevania no Flecha Mágica. Jogue com a gente e assista <a target="_blank" href="https://www.youtube.com/watch?v=-CUU1Q-hwcQ&list=PL0U_wHxzKZ5w0e-phZPps5SdBp-86tXwh">clicando aqui</a>.</div>
+        <br>
+        <div class="videowrapper">
+          <iframe src="https://www.youtube.com/embed/-CUU1Q-hwcQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </form>
+    </main>
+
     <nav>
       <button type="button" id="botao_menu_rolagens">
         <img src="img/menu_v2.png">
@@ -24,6 +36,12 @@
     </nav>
 
     <main id="menu_inventario">
+      <h1 class="maior cifras">
+        Cifras (Máximo: <input type="number" id="maximo_cifras" value="1">)
+      </h1>
+      <div class="lista" id="itens_cifras">
+      </div>
+
       <h1 class="maior">Itens Equipados</h1>
       <div class="lista" id="itens_equipados">
       </div>
@@ -53,23 +71,23 @@
         </div>
         <div>
           <span>Quantidade de Armas:</span>
-          <input id="quantidade_armas" type="number" min="1" value="1">
+          <input id="quantidade_armas" type="number" min="0" value="3">
         </div>
         <div>
           <span>Quantidade de Escudos:</span>
-          <input id="quantidade_escudos" type="number" min="1" value="1">
+          <input id="quantidade_escudos" type="number" min="0" value="3">
         </div>
         <div>
           <span>Quantidade de Armaduras:</span>
-          <input id="quantidade_armaduras" type="number" min="1" value="1">
+          <input id="quantidade_armaduras" type="number" min="0" value="3">
         </div>
         <div>
           <span>Quantidade de Relíquias:</span>
-          <input id="quantidade_reliquias" type="number" min="1" value="1">
+          <input id="quantidade_reliquias" type="number" min="0" value="3">
         </div>
         <div>
           <span>Quantidade de Poções:</span>
-          <input id="quantidade_pocoes" type="number" min="1" value="1">
+          <input id="quantidade_pocoes" type="number" min="0" value="3">
         </div>
         <br>
         <button type="submit">
@@ -102,10 +120,12 @@
 
     </main>
 
+    <span class="final">
+
     <script src="https://unpkg.com/uuid@latest/dist/umd/uuidv4.min.js"></script>
+    <script type="text/javascript" src="js/banco.js"></script>
     <script type="text/javascript" src="js/dados.js"></script>
     <script type="text/javascript" src="js/sortear.js"></script>
-    <script type="text/javascript" src="js/render.js"></script>
-    <script type="text/javascript" src="js/banco.js"></script>
+    <script type="text/javascript" src="js/render.js"></script>    
   </body>
 </html>

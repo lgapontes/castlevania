@@ -892,10 +892,14 @@ function sortearArma() {
 }
 
 function sortearItens(quantidade,funcaoSorteada,callback) {
-  for(let i=0; i<quantidade; i++) {
-    funcaoSorteada();
-    if (i == (quantidade - 1)) {
-      callback();
-    }
+  if (quantidade == 0) {
+    callback();
+  } else {
+    for(let i=0; i<quantidade; i++) {
+      funcaoSorteada();
+      if (i == (quantidade - 1)) {
+        callback();
+      }
+    }    
   }
 }
